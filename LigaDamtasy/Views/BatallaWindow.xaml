@@ -1,0 +1,25 @@
+﻿<Window x:Class="LigaDAMtasy.BattleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Batalla" Height="500" Width="900"
+        WindowStartupLocation="CenterScreen"
+        Background="#1E1E1E">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+            <TextBlock x:Name="BattleResultTextBlock" FontSize="24" FontWeight="Bold" Foreground="White" TextAlignment="Center"/>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="20" Background="#2D2D30">
+                    <TextBlock Text="Tu jugador" FontWeight="Bold" HorizontalAlignment="Center" Foreground="White" FontSize="16"/>
+                    <Image x:Name="UserCardImage" Width="200" Height="300" Margin="10"/>
+                    <TextBlock x:Name="UserCardInfoTextBlock" HorizontalAlignment="Center" Foreground="White" TextAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Margin="20" Background="#2D2D30">
+                    <TextBlock Text="Jugador rival" FontWeight="Bold" HorizontalAlignment="Center" Foreground="White" FontSize="16"/>
+                    <Image x:Name="OpponentCardImage" Width="200" Height="300" Margin="10"/>
+                    <TextBlock x:Name="OpponentCardInfoTextBlock" HorizontalAlignment="Center" Foreground="White" TextAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+            <Button Content="Cerrar" Width="120" Height="40" Click="CloseButton_Click" Background="#007ACC" Foreground="White" FontWeight="Bold" Margin="20"/>
+        </StackPanel>
+    </Grid>
+</Window>
