@@ -131,7 +131,14 @@
 
                     <!-- Logo y título -->
                     <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
-                        <Ellipse Width="40" Height="40" Fill="White" Margin="0,0,15,0"/>
+                        <Viewbox Width="40" Height="40" Margin="0,0,15,0">
+                            <Grid> 
+                                <Image Source="/Assets/Images/Logo.png"
+                                Stretch="UniformToFill"
+                                ClipToBounds="True"/>
+                            </Grid>
+                        </Viewbox>
+
                         <StackPanel VerticalAlignment="Center">
                             <TextBlock Text="Liga DAMtasy" FontSize="24" FontWeight="Bold" 
                                      Foreground="White" Margin="0,0,0,2"/>
@@ -147,7 +154,7 @@
                                 <TextBlock Name="UserNameTextBlock" Foreground="White" 
                                          FontWeight="SemiBold" VerticalAlignment="Center"/>
                             </StackPanel>
-             
+
                         </Border>
 
                         <Border Background="#33FFFFFF" CornerRadius="8" 
@@ -156,23 +163,24 @@
                                 <TextBlock Text="💰" FontSize="16" Margin="0,0,8,0"/>
                                 <TextBlock Name="CoinsTextBlock" Foreground="White" 
                                          FontWeight="SemiBold" VerticalAlignment="Center"/>
-                                <TextBlock Text=" monedas" Foreground="#E6FFFFFF" 
+                                <TextBlock Text=" Monedas" Foreground="#E6FFFFFF" 
                                          VerticalAlignment="Center" Margin="2,0,0,0"/>
                             </StackPanel>
                         </Border>
 
                         <Button Style="{StaticResource SecondaryButton}" Content="Mis Cartas" 
-                                Click="MiColeccionButton_Click" Margin="0,0,10,0" 
-                                Background="#1AFFFFFF" BorderBrush="#4DFFFFFF"
-                                Foreground="White"/>
-                        <Button Style="{StaticResource SecondaryButton}" Content="Cerrar Aplicación" 
-                                Click="CerrarApp_Click"
-                                Background="#1AFFFFFF" BorderBrush="#4DFFFFFF"
-                                Foreground="White"/>
+                        Click="MiColeccionButton_Click" Margin="0,0,20,0" 
+                        Background="#1AFFFFFF" BorderBrush="#4DFFFFFF"
+                        Foreground="White"/>
                         <Button Style="{StaticResource SecondaryButton}" Content="Cerrar Sesión" 
-                                Click="LogoutButton_Click"
-                                Background="#1AFFFFFF" BorderBrush="#4DFFFFFF"
-                                Foreground="White"/>
+                        Click="LogoutButton_Click"
+                        Background="#1AFFFFFF" BorderBrush="#4DFFFFFF"
+                        Foreground="White" Margin="0,0,20,0"/>
+                        <Button Style="{StaticResource SecondaryButton}" Content="Cerrar Aplicación" 
+                        Click="CerrarApp_Click"
+                        Background="#1AFFFFFF" BorderBrush="#4DFFFFFF"
+                        Foreground="White"/>
+
                     </StackPanel>
                 </Grid>
             </Border>
@@ -191,12 +199,10 @@
                 <Border Grid.Column="0" Style="{StaticResource CardStyle}">
                     <StackPanel HorizontalAlignment="Center">
                         <Border Background="#f1f5f9" CornerRadius="12" Padding="20" 
-                                Margin="0,0,0,20" Width="200" Height="200">
+                                Margin="0,0,0,20" Width="270" Height="200">
                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock Text="📦" FontSize="64" HorizontalAlignment="Center" 
-                                         Margin="0,0,0,10"/>
-                                <TextBlock Text="SOBRE BÁSICO" FontWeight="Bold" FontSize="14" 
-                                         Foreground="#475569" HorizontalAlignment="Center"/>
+
+                                <Image Height="163" Source="/Assets/Images/sobre_normal.jpg" Stretch="Fill" Width="237"/>
                             </StackPanel>
                         </Border>
 
@@ -262,18 +268,15 @@
                 <Border Grid.Column="4" Style="{StaticResource CardStyle}">
                     <StackPanel HorizontalAlignment="Center">
                         <Border CornerRadius="12" Padding="20" Margin="0,0,0,20" 
-                                Width="200" Height="200">
+                                Width="321" Height="200">
                             <Border.Background>
                                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                                     <GradientStop Color="#ffd700" Offset="0"/>
                                     <GradientStop Color="#ffed4e" Offset="1"/>
                                 </LinearGradientBrush>
                             </Border.Background>
-                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock Text="✨" FontSize="64" HorizontalAlignment="Center" 
-                                         Margin="0,0,0,10"/>
-                                <TextBlock Text="SOBRE PREMIUM" FontWeight="Bold" FontSize="14" 
-                                         Foreground="#92400e" HorizontalAlignment="Center"/>
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Height="180" Width="286">
+                                <Image Height="222" Source="/Assets/Images/sobre_mejorado.jpg" Stretch="Fill" Width="297"/>
                             </StackPanel>
                         </Border>
 
@@ -304,7 +307,7 @@
                     <TextBlock Name="PlayerInfoLabel" HorizontalAlignment="Left" 
                              VerticalAlignment="Center" Foreground="#CCFFFFFF" 
                              FontSize="12"/>
-                    <TextBlock Text="Liga DAMtasy v2.0 - Dashboard Profesional" 
+                    <TextBlock Text="Liga DAMtasy v2.0" 
                              HorizontalAlignment="Right" VerticalAlignment="Center" 
                              Foreground="#99FFFFFF" FontSize="11"/>
                 </Grid>

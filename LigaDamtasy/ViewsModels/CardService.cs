@@ -65,6 +65,7 @@ namespace LigaDAMtasy.ViewsModels
             HttpResponseMessage response = await _httpClient.PostAsJsonAsync(_url + "sell_card", data);
             return response.IsSuccessStatusCode;
         }
+
         public async Task<JsonNode?> Partida()
         {
             HttpResponseMessage response = await _httpClient.PostAsync(_url + "battle", null);
@@ -74,6 +75,38 @@ namespace LigaDAMtasy.ViewsModels
             }
             return null;
         }
-    
+
+        public async Task<JsonNode?> Batalla(List<Card> cartasSeleccionadas, string modo)
+        {
+            var cartasPayload = cartasSeleccionadas.ConvertAll(c => new { nombre = c.Nombre, apellidos = c.Apellidos });
+            var data = new
+            {
+                cartas = cartasPayload,
+                modo = modo.ToLower()
+            };
+
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync(_url + "battle", data);
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonNode.Parse(await response.Content.ReadAsStringAsync());
+            }
+            return null;
+        }
+
+        public async Task<JsonNode?> RealizarBatalla(List<string> ids, string accion)
+        {
+            var body = new
+            {
+                cartas = ids,
+                accion = accion
+            };
+
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync(_url + "battle", body);
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonNode.Parse(await response.Content.ReadAsStringAsync());
+            }
+            return null;
+        }
     }
 }

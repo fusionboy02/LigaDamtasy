@@ -68,8 +68,11 @@ namespace LigaDAMtasy
                                              $"Posición: {selectedCard.Posicion}\n" +
                                              $"Equipo: {selectedCard.Equipo}\n" +
                                              $"Nacionalidad: {selectedCard.Nacionalidad}\n" +
-                                             $"Rareza: {selectedCard.Rareza}\n";
-                                             
+                                             $"Rareza: {selectedCard.Rareza}\n" +
+                                             $"Ataque: {selectedCard.Ataque}\n" +
+                                             $"Defensa: {selectedCard.Defensa}\n";
+
+
             }
         }
 

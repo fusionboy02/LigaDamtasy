@@ -9,34 +9,28 @@
         Background="Transparent"
         WindowState="Maximized">
 
-
     <Window.Resources>
         <!-- Gradientes y Brushes -->
         <LinearGradientBrush x:Key="PrimaryGradient" StartPoint="0,0" EndPoint="1,1">
             <GradientStop Color="#667eea" Offset="0"/>
             <GradientStop Color="#764ba2" Offset="1"/>
         </LinearGradientBrush>
-
         <LinearGradientBrush x:Key="CardGradient" StartPoint="0,0" EndPoint="0,1">
             <GradientStop Color="#ffffff" Offset="0"/>
             <GradientStop Color="#f8fafc" Offset="1"/>
         </LinearGradientBrush>
-
         <LinearGradientBrush x:Key="AccentGradient" StartPoint="0,0" EndPoint="1,0">
             <GradientStop Color="#4facfe" Offset="0"/>
             <GradientStop Color="#00f2fe" Offset="1"/>
         </LinearGradientBrush>
-
         <LinearGradientBrush x:Key="WarningGradient" StartPoint="0,0" EndPoint="1,0">
             <GradientStop Color="#fa709a" Offset="0"/>
             <GradientStop Color="#fee140" Offset="1"/>
         </LinearGradientBrush>
-
         <LinearGradientBrush x:Key="SuccessGradient" StartPoint="0,0" EndPoint="1,0">
             <GradientStop Color="#56ab2f" Offset="0"/>
             <GradientStop Color="#a8e6cf" Offset="1"/>
         </LinearGradientBrush>
-
         <!-- Estilos para botones principales -->
         <Style x:Key="PrimaryButton" TargetType="Button">
             <Setter Property="Background" Value="{StaticResource AccentGradient}"/>
@@ -71,7 +65,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
         <!-- Estilo para botones de compra -->
         <Style x:Key="BuyButton" TargetType="Button">
             <Setter Property="Background" Value="{StaticResource SuccessGradient}"/>
@@ -106,7 +99,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
         <!-- Estilo para botones secundarios -->
         <Style x:Key="SecondaryButton" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
@@ -137,7 +129,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
         <!-- Estilo para las tarjetas -->
         <Style x:Key="CardStyle" TargetType="Border">
             <Setter Property="Background" Value="{StaticResource CardGradient}"/>
@@ -150,7 +141,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
         <!-- Estilo para ComboBox modernizado -->
         <Style x:Key="ModernComboBox" TargetType="ComboBox">
             <Setter Property="Background" Value="White"/>
@@ -198,7 +188,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
         <!-- Estilo para TextBox modernizado -->
         <Style x:Key="ModernTextBox" TargetType="TextBox">
             <Setter Property="Background" Value="White"/>
@@ -249,7 +238,9 @@
 
                     <!-- Logo y título -->
                     <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
-                        <Ellipse Width="40" Height="40" Fill="White" Margin="0,0,15,0"/>
+                        <Grid Width="40" Height="40" Margin="0,0,15,0">
+                            <Image Source="/Assets/Images/Logo.png" Stretch="UniformToFill" ClipToBounds="True"/>
+                        </Grid>
                         <StackPanel VerticalAlignment="Center">
                             <TextBlock Text="🏪 Mercado DAMtasy" FontSize="24" FontWeight="Bold" 
                                      Foreground="White" Margin="0,0,0,2"/>
@@ -258,9 +249,10 @@
                         </StackPanel>
                     </StackPanel>
                     <Button Content="✕" HorizontalAlignment="Right" VerticalAlignment="Top"
-        Width="30" Height="30" Background="#33FFFFFF" 
-        BorderThickness="0" Foreground="White" FontSize="16"
-        Cursor="Hand" Click="CloseButton_Click">
+                            Width="30" Height="30" Background="#33FFFFFF" 
+                            BorderThickness="0" Foreground="White" FontSize="16"
+                            Cursor="Hand" Click="CloseButton_Click"
+                            Margin="0,0,30,0">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border Background="{TemplateBinding Background}" 
@@ -384,13 +376,11 @@
 
                         <TextBlock Grid.Column="3" Text="Equipo:" VerticalAlignment="Center" 
                                  FontWeight="SemiBold" Foreground="#374151" Margin="0,0,10,0"/>
-                        <TextBox Grid.Column="4" Name="EquipoTextBox" Style="{StaticResource ModernTextBox}" 
-                               Text="Buscar por equipo..."/>
+                        <TextBox Grid.Column="4" Name="EquipoTextBox" Style="{StaticResource ModernTextBox}"/>
 
                         <TextBlock Grid.Column="6" Text="Nombre:" VerticalAlignment="Center" 
                                  FontWeight="SemiBold" Foreground="#374151" Margin="0,0,10,0"/>
-                        <TextBox Grid.Column="7" Name="NombreTextBox" Style="{StaticResource ModernTextBox}" 
-                               Text="Buscar por nombre..."/>
+                        <TextBox Grid.Column="7" Name="NombreTextBox" Style="{StaticResource ModernTextBox}"/>
 
                         <Button Grid.Column="9" Content="🔍 Filtrar" Style="{StaticResource PrimaryButton}" 
                                 Click="BotonFiltrar" HorizontalAlignment="Right" MinWidth="120"/>
@@ -400,9 +390,17 @@
 
             <!-- Lista de cartas disponibles -->
             <Border Grid.Row="3" Style="{StaticResource CardStyle}">
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                    <ListBox Name="AvailableCardsListBox" Background="Transparent" BorderThickness="0"
-                             SelectionChanged="CardsListBox_SelectionChanged">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="15*"/>
+                        <ColumnDefinition Width="119*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListBox Name="AvailableCardsListBox"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             SelectionChanged="CardsListBox_SelectionChanged"
+                             ScrollViewer.VerticalScrollBarVisibility="Auto"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.ColumnSpan="2">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
@@ -414,23 +412,21 @@
                                         MinWidth="200" MaxWidth="220">
                                     <Border.Effect>
                                         <DropShadowEffect BlurRadius="15" Direction="270" 
-                                                        ShadowDepth="3" Opacity="0.15" Color="#000000"/>
+                                              ShadowDepth="3" Opacity="0.15" Color="#000000"/>
                                     </Border.Effect>
                                     <StackPanel>
                                         <!-- Imagen de la carta -->
                                         <Border CornerRadius="8" Margin="0,0,0,10" Background="#f8fafc">
                                             <Image Source="{Binding Imagen}" Width="150" Height="180" 
-                                                 Stretch="UniformToFill"/>
+                                                   Stretch="UniformToFill"/>
                                         </Border>
-
                                         <!-- Información de la carta -->
                                         <TextBlock Text="{Binding Nombre}" FontWeight="Bold" FontSize="16"
-                                                 Foreground="#1e293b" HorizontalAlignment="Center" 
-                                                 Margin="0,0,0,2"/>
+                                                   Foreground="#1e293b" HorizontalAlignment="Center" 
+                                                   Margin="0,0,0,2"/>
                                         <TextBlock Text="{Binding Apellidos}" FontWeight="SemiBold" FontSize="14"
-                                                 Foreground="#64748b" HorizontalAlignment="Center" 
-                                                 Margin="0,0,0,8"/>
-
+                                                   Foreground="#64748b" HorizontalAlignment="Center" 
+                                                   Margin="0,0,0,8"/>
                                         <!-- Rareza con estilo -->
                                         <Border CornerRadius="20" Padding="8,4" Margin="0,0,0,5">
                                             <Border.Style>
@@ -452,7 +448,7 @@
                                                 </Style>
                                             </Border.Style>
                                             <TextBlock Text="{Binding Rareza}" FontWeight="Bold" FontSize="11"
-                                                     HorizontalAlignment="Center">
+                                                       HorizontalAlignment="Center">
                                                 <TextBlock.Style>
                                                     <Style TargetType="TextBlock">
                                                         <Style.Triggers>
@@ -473,12 +469,10 @@
                                                 </TextBlock.Style>
                                             </TextBlock>
                                         </Border>
-
                                         <!-- Equipo -->
                                         <TextBlock Text="{Binding Equipo}" FontSize="12" 
-                                                 Foreground="#94a3b8" HorizontalAlignment="Center" 
-                                                 Margin="0,0,0,12"/>
-
+                                                   Foreground="#94a3b8" HorizontalAlignment="Center" 
+                                                   Margin="0,0,0,12"/>
                                         <!-- Botón de compra -->
                                         <Button Content="💳 Comprar" Tag="{Binding}" 
                                                 Click="BotonComprarCarta" Style="{StaticResource BuyButton}"
@@ -499,7 +493,7 @@
                             </Style>
                         </ListBox.ItemContainerStyle>
                     </ListBox>
-                </ScrollViewer>
+                </Grid>
             </Border>
 
             <!-- Footer -->

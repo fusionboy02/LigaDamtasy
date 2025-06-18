@@ -212,20 +212,19 @@
             <Grid Grid.Column="0" Margin="40">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                     <!-- Logo grande -->
-                    <Border Background="#26FFFFFF" CornerRadius="25" Padding="30" Margin="0,0,0,30">
+
+                    <!-- Características destacadas -->
+                    <!-- Logo grande -->
+                    <Border Background="#26FFFFFF" CornerRadius="25" Padding="30" Height="289">
                         <StackPanel HorizontalAlignment="Center">
-                            <Ellipse Width="120" Height="120" Fill="White" Margin="0,0,0,20"/>
+                            <Grid Width="120" Height="120" Margin="0,0,0,20">
+                                <Ellipse Fill="#FFE5E3E0" Margin="-14,-16,-18,-16"/>
+                                <Image Source= "/Assets/Images/Logo.png" Stretch="UniformToFill" ClipToBounds="True" Margin="10"/>
+                            </Grid>
                             <TextBlock Text="Liga DAMtasy" FontSize="36" FontWeight="Bold" 
                                      Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,10"/>
                             <TextBlock Text="Tu aventura futbolística comienza aquí" FontSize="16" 
-                                     Foreground="#E6FFFFFF" HorizontalAlignment="Center" TextAlignment="Center"/>
-                            <Button Content="Cerrar"
-        HorizontalAlignment="Center"
-        VerticalAlignment="Top"
-        Margin="0,10,10,0"
-        Width="80"
-        Height="30"
-        Click="CerrarApp_Click"/>
+                            Foreground="#E6FFFFFF" HorizontalAlignment="Center" TextAlignment="Center"/>
 
                         </StackPanel>
                     </Border>
@@ -277,33 +276,21 @@
                             <StackPanel>
                                 <Button Content="🚀 Iniciar Sesión" Style="{StaticResource PrimaryButton}" 
                                         Click="LoginButton_Click" Margin="0,0,0,15"/>
-                                
-                                <Button Content="📝 Crear Nueva Cuenta" Style="{StaticResource SecondaryButton}" 
+
+                                <Button Content="📝 Regístrate" Style="{StaticResource SecondaryButton}" 
                                         Click="RegisterButton_Click"/>
                             </StackPanel>
 
                             <!-- Separador y enlace adicional -->
                             <Border Background="#e2e8f0" Height="1" Margin="0,30,0,20"/>
-                            
-                            <TextBlock Text="¿Olvidaste tu contraseña?" HorizontalAlignment="Center" 
-                                     Foreground="#64748b" FontSize="13" Cursor="Hand">
-                                <TextBlock.Style>
-                                    <Style TargetType="TextBlock">
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Foreground" Value="#4facfe"/>
-                                                <Setter Property="TextDecorations" Value="Underline"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
+
+
                         </StackPanel>
                     </Border>
 
                     <!-- Footer -->
                     <Border Background="#1AFFFFFF" CornerRadius="10" Padding="15" Margin="0,20,0,0" MinWidth="400">
-                        <TextBlock Text="Liga DAMtasy v2.0 - Sistema de Autenticación Seguro" 
+                        <TextBlock Text="Liga DAMtasy v2.0" 
                                  HorizontalAlignment="Center" VerticalAlignment="Center" 
                                  Foreground="#99FFFFFF" FontSize="11"/>
                     </Border>

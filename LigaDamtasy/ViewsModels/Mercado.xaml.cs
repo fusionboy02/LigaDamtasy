@@ -50,17 +50,20 @@ namespace LigaDAMtasy
             {
                 cards.Add(new Card
                 {
-                    Nombre = cardNode["nombre"].ToString(),
-                    Apellidos = cardNode["apellidos"].ToString(),
-                    Posicion = cardNode["posicion"].ToString(),
-                    Equipo = cardNode["equipo"].ToString(),
-                    Nacionalidad = cardNode["nacionalidad"].ToString(),
-                    Imagen = apiService._url + cardNode["imagen"].ToString(),
-                    Rareza = cardNode["rareza"].ToString()
+                    Nombre = cardNode["nombre"]?.ToString(),
+                    Apellidos = cardNode["apellidos"]?.ToString(),
+                    Posicion = cardNode["posicion"]?.ToString(),
+                    Equipo = cardNode["equipo"]?.ToString(),
+                    Nacionalidad = cardNode["nacionalidad"]?.ToString(),
+                    Imagen = apiService._url + cardNode["imagen"]?.ToString(),
+                    Rareza = cardNode["rareza"]?.ToString(),
+                    Ataque = cardNode["ataque"] != null ? int.Parse(cardNode["ataque"].ToString()) : 0,
+                    Defensa = cardNode["defensa"] != null ? int.Parse(cardNode["defensa"].ToString()) : 0
                 });
             }
             return cards;
         }
+
 
         private async void BotonComprarCarta(object sender, RoutedEventArgs e)
         {
@@ -101,35 +104,40 @@ namespace LigaDAMtasy
 
         private void BotonFiltrar(object sender, RoutedEventArgs e)
         {
-            string rarezaFiltro = (RarezaComboBox.SelectedItem as ComboBoxItem)?.Content.ToString()?.ToLower() ?? "todas";
+            string rarezaFiltro = (RarezaComboBox.SelectedItem as ComboBoxItem)?.Content.ToString() ?? "Todas";
             string equipoFiltro = EquipoTextBox.Text.Trim().ToLower();
+
+
             string nombreFiltro = NombreTextBox.Text.Trim().ToLower();
 
             var filteredCards = allCards;
 
-            // Filto por rareza
-            if (rarezaFiltro != "todas")
+            // Filtro por rareza (ignora si es "Todas")
+            if (!string.Equals(rarezaFiltro, "Todas", StringComparison.OrdinalIgnoreCase))
             {
-                filteredCards = filteredCards.FindAll(card => card.Rareza.ToLower() == rarezaFiltro);
+                filteredCards = filteredCards.FindAll(card =>
+                    string.Equals(card.Rareza, rarezaFiltro, StringComparison.OrdinalIgnoreCase));
             }
 
             // Filtro por equipo
             if (!string.IsNullOrEmpty(equipoFiltro))
             {
-                filteredCards = filteredCards.FindAll(card => card.Equipo.ToLower().Contains(equipoFiltro));
+                filteredCards = filteredCards.FindAll(card =>
+                    card.Equipo != null && card.Equipo.ToLower().Contains(equipoFiltro));
             }
 
-            // Filtro por nombre y apellido (ambos)
+            // Filtro por nombre o apellidos
             if (!string.IsNullOrEmpty(nombreFiltro))
             {
                 filteredCards = filteredCards.FindAll(card =>
-                    card.Nombre.ToLower().Contains(nombreFiltro) ||
-                    card.Apellidos.ToLower().Contains(nombreFiltro));
+                    (card.Nombre != null && card.Nombre.ToLower().Contains(nombreFiltro)) ||
+                    (card.Apellidos != null && card.Apellidos.ToLower().Contains(nombreFiltro)));
             }
 
-            // Actualiza la lista con los resultados filtrados
             AvailableCardsListBox.ItemsSource = filteredCards;
         }
+
+
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {

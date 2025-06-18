@@ -65,6 +65,9 @@ namespace LigaDAMtasy.ViewsModels
                             Nacionalidad = cardNode["nacionalidad"]?.ToString() ?? "",
                             Imagen = _url + (cardNode["imagen"]?.ToString() ?? ""),
                             Rareza = cardNode["rareza"]?.ToString() ?? "",
+                            Ataque = cardNode["ataque"]?.GetValue<int>() ?? 0,
+                            Defensa = cardNode["defensa"]?.GetValue<int>() ?? 0,
+
                             Cantidad = cardNode["cantidad"]?.GetValue<int>() ?? 1 // Usar el campo cantidad
                         });
                     }

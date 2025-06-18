@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using LigaDAMtasy.Models;
@@ -7,10 +9,13 @@ namespace LigaDAMtasy
 {
     public partial class PackWindow : Window
     {
-        public PackWindow(List<Card> cards)
+        private readonly Func<Task<List<Card>>> _comprarSobreAsync;
+
+        public PackWindow(List<Card> cards, Func<Task<List<Card>>> comprarSobreAsync)
         {
             InitializeComponent();
             CardsListBox.ItemsSource = cards;
+            _comprarSobreAsync = comprarSobreAsync;
         }
 
         private void CardsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -22,6 +27,7 @@ namespace LigaDAMtasy
                                              $"Equipo: {selectedCard.Equipo}\n" +
                                              $"Nacionalidad: {selectedCard.Nacionalidad}\n" +
                                              $"Rareza: {selectedCard.Rareza}";
+                                           
             }
             else
             {
@@ -34,20 +40,21 @@ namespace LigaDAMtasy
             this.Close();
         }
 
-        private void OpenAnotherPack_Click(object sender, RoutedEventArgs e)
+        private async void OpenAnotherPack_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                // Cerrar la ventana actual
+                var nuevasCartas = await _comprarSobreAsync();
+                if (nuevasCartas != null && nuevasCartas.Count > 0)
+                {
+                    var nuevoPackWindow = new PackWindow(nuevasCartas, _comprarSobreAsync);
+                    nuevoPackWindow.Show();
+                }
                 this.Close();
-
-                // Volver a la página principal donde están los botones de sobres
-                var paginaPrincipal = new PaginaPrincipal();
-                paginaPrincipal.Show();
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show($"Error al abrir la página principal: {ex.Message}", "Error",
+                MessageBox.Show($"Error al abrir otro sobre: {ex.Message}", "Error",
                               MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -56,14 +63,11 @@ namespace LigaDAMtasy
         {
             try
             {
-                // Cerrar la ventana actual
                 this.Close();
-
-                // Volver a la página principal
                 var paginaPrincipal = new PaginaPrincipal();
                 paginaPrincipal.Show();
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show($"Error al volver al menú principal: {ex.Message}", "Error",
                               MessageBoxButton.OK, MessageBoxImage.Error);

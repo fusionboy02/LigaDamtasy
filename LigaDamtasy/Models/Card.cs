@@ -9,13 +9,18 @@ namespace LigaDAMtasy.Models
     public class Card
     {
         public string Nombre { get; set; }
+        public string Id { get; set; }  
         public string Apellidos { get; set; }
         public string Posicion { get; set; }
         public string Equipo { get; set; }
         public string Nacionalidad { get; set; }
         public string Imagen { get; set; }
         public string Rareza { get; set; }
+        public int Ataque { get; set; }
+        public int Defensa { get; set; }
         public int Cantidad { get; set; }
+      
+
     }
 
 }

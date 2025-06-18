@@ -60,7 +60,14 @@ namespace LigaDAMtasy
             if (packResponse != null)
             {
                 List<Card> cards = ParsePackCards(packResponse);
-                PackWindow packWindow = new PackWindow(cards);
+
+                Func<Task<List<Card>>> comprarSobreAsync = async () =>
+                {
+                    var nuevoPackResponse = await _cardService.ComprarSobre("estándar");
+                    return nuevoPackResponse != null ? ParsePackCards(nuevoPackResponse) : new List<Card>();
+                };
+
+                PackWindow packWindow = new PackWindow(cards, comprarSobreAsync);
                 packWindow.ShowDialog();
 
                 await ActualizarMonedas();
@@ -70,6 +77,7 @@ namespace LigaDAMtasy
                 MessageBox.Show("Error al abrir el sobre.");
             }
         }
+
 
         private async void BotonSobreMejorado(object sender, RoutedEventArgs e)
         {
@@ -77,10 +85,16 @@ namespace LigaDAMtasy
             if (packResponse != null)
             {
                 List<Card> cards = ParsePackCards(packResponse);
-                PackWindow packWindow = new PackWindow(cards);
+
+                Func<Task<List<Card>>> comprarSobreAsync = async () =>
+                {
+                    var nuevoPackResponse = await _cardService.ComprarSobre("mejorado");
+                    return nuevoPackResponse != null ? ParsePackCards(nuevoPackResponse) : new List<Card>();
+                };
+
+                PackWindow packWindow = new PackWindow(cards, comprarSobreAsync);
                 packWindow.ShowDialog();
 
-                // Actualiza las monedas después de la compra
                 await ActualizarMonedas();
             }
             else
@@ -88,6 +102,7 @@ namespace LigaDAMtasy
                 MessageBox.Show("Error al abrir el sobre.");
             }
         }
+
 
         private List<Card> ParsePackCards(JsonNode packResponse)
         {
